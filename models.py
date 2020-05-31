@@ -15,7 +15,8 @@ class GAT(nn.Module):
         for i, attention in enumerate(self.attentions):
             self.add_module('attention_{}'.format(i), attention)
 
-        self.out_att = GraphAttentionLayer(nhid * nheads, nout, dropout=dropout, alpha=alpha, concat=False)
+        # self.out_att = GraphAttentionLayer(nhid * nheads, nout, dropout=dropout, alpha=alpha, concat=False)
+        self.out_att = GraphAttentionLayer(nhid, nout, dropout=dropout, alpha=alpha, concat=False)
 
         self.MLP = torch.nn.Sequential(
             torch.nn.Linear(nout, nlmphid),
@@ -25,9 +26,11 @@ class GAT(nn.Module):
 
     def forward(self, x, x_mask, adj):
         x = F.dropout(x, self.dropout, training=self.training)
-        x = torch.cat([att(x, adj) for att in self.attentions], dim=1)
+        att = self.attentions[0]
+        x = torch.cat([att(x_, adj_).unsqueeze(0) for att in self.attentions for (x_, adj_) in zip(x,adj)], dim=0)
+        # x = torch.bmm(adj, x)
         x = F.dropout(x, self.dropout, training=self.training)
-        x = F.elu(self.out_att(x, adj))
+        x = torch.cat([F.elu(self.out_att(x_, adj_)).unsqueeze(0) for (x_, adj_) in zip(x, adj)],dim=0)
         # return F.log_softmax(x, dim=1)
         x = readout(x, x_mask)
         x = self.MLP(x)
