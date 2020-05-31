@@ -199,7 +199,7 @@ if __name__ == '__main__':
         train_logf = open('./log/train_log_{}.txt'.format(pos_ratio), "w")
         val_logf = open('./log/val_log_{}.txt'.format(pos_ratio), "w")
         if not os.path.exists('./scalar/scalar_{}'.format(pos_ratio)):
-            os.mkdir('./scalar/scalar_{}'.format(pos_ratio))
+            os.makedirs('./scalar/scalar_{}'.format(pos_ratio))
             
         writer = SummaryWriter(log_dir='./scalar/scalar_{}'.format(pos_ratio))
         
