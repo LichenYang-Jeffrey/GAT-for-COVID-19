@@ -1,7 +1,7 @@
 # GAT-for-COVID-19
-This implementation of GAT ([Graph Attention Network, Veličković et. al](https://arxiv.org/abs/1710.10903)) is revised from [pyGAT](https://github.com/Diego999/pyGAT) to predict antiviral activity against SARS-CoV-2 (COVID-19). The task is specified in (https://www.aicures.mit.edu/tasks)[https://www.aicures.mit.edu/tasks].
+This implementation of GAT ([Graph Attention Network, Veličković et. al](https://arxiv.org/abs/1710.10903)) is revised from [pyGAT](https://github.com/Diego999/pyGAT) to predict antiviral activity against SARS-CoV-2 (COVID-19). The task is specified in https://www.aicures.mit.edu/tasks.
 
-Data is available in folder /data_covid, which is described in [https://github.com/yangkevin2/coronavirus_data](https://github.com/yangkevin2/coronavirus_data). Since the dataset is highly imbabanced, [imbalanced sampling technique](https://github.com/ufoym/imbalanced-dataset-sampler) is applied to generate training data.
+Data is available in folder /data_covid, which is described in https://github.com/yangkevin2/coronavirus_data. Since the dataset is highly imbabanced, [imbalanced sampling technique](https://github.com/ufoym/imbalanced-dataset-sampler) is applied to generate training data.
 
 The training ans validation process is specified in main.py.
 
