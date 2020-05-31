@@ -59,8 +59,7 @@ train_size = int(0.9 * len(dataset))
 val_size = len(dataset) - train_size
 train_db, val_db = torch.utils.data.random_split(dataset, [train_size, val_size])
 
-# pos_ratio_list = [0.50, 0.125, 0.25]
-pos_ratio_list = [0.25]
+pos_ratio_list = [0.125, 0.25, 0.50]
 
 valloader = MolecularDataLoader(dataset=val_db,
                                     batch_size=args.batch_size,
